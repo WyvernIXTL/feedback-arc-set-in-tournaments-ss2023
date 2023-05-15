@@ -1,0 +1,65 @@
+% Copyright (c) 2023-present, Adam McKellar & Kai Rothe
+% All rights reserved.
+%
+% This source code is licensed under the license found in the
+% LICENSE file in the root directory of this source tree.
+
+% !TEX engine = luatex
+% !TeX spellcheck = en_EN
+
+
+\documentclass{beamer}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks,
+	allcolors=.,
+	urlcolor=blue,
+}
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+
+\usepackage{showexpl}
+
+\usepackage[useregional]{datetime2}
+
+% https://hartwork.org/beamer-theme-matrix/
+\usetheme{Antibes}
+\usecolortheme{beaver}
+\useinnertheme{circles}
+
+\usepackage[
+	type={CC},
+	modifier={by},
+	version={4.0},
+	imagemodifier={-80x15},
+]{doclicense}
+
+\author{Adam McKellar\qquad Kai Rothe\qquad}
+\title{Feedback Arc Set in Tournaments}
+\date{\today}
+
+\begin{document}
+	\frame{\titlepage}
+	
+	\begin{frame}{Overview}
+		\tableofcontents
+		\tiny
+		\doclicenseThis
+	\end{frame}
+
+	\section{First Section}
+	\begin{frame}[fragile]{First Slide}
+		\begin{itemize}
+			\item<1> first line
+			\item<2-> second line
+			\item<3-> third line
+		\end{itemize}
+	\end{frame}
+	
+\end{document}
