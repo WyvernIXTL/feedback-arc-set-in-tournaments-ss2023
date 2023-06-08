@@ -44,6 +44,8 @@
 \title{Feedback Arc Set in Tournaments}
 \date{\today}
 
+\newcommand{\abs}[1]{\| #1 \|}
+
 \begin{document}
 	\frame{\titlepage}
 	
@@ -51,6 +53,50 @@
 		\tableofcontents
 		\tiny
 		\doclicenseThis
+	\end{frame}
+
+	\section{Feedback Arc Set in Tournaments}
+	\begin{frame}[fragile]{Feedback Arc Set (FAS)}
+		\begin{align*}			
+			FAS := \{&(G = (V, E), k) | G \text{ is directed } \\
+										&\land \exists E' \subset E : \abs{E'} \leq k : G' = (V, E - E') \text{ is acyclic}  \}		
+		\end{align*}
+	\end{frame}
+	\begin{frame}[fragile]{Feedback Arc Set (FAS) Example}
+		Example \(G\) :
+		\begin{center}
+			\includegraphics<1>[height=0.3\paperheight]{images/FAS/cyclic_graph_example.pdf}
+			\includegraphics<2>[height=0.3\paperheight]{images/FAS/cyclic_graph_example_highlight_cycles.pdf}
+			\includegraphics<3>[height=0.3\paperheight]{images/FAS/cyclic_graph_example_highlight_solution_k2.pdf}
+			\includegraphics<4->[height=0.3\paperheight]{images/FAS/cyclic_graph_example_highlight_solution_k1.pdf}
+		\end{center}
+		\begin{itemize}
+			\item<3-> Solvable for \(k=2\)
+			\item<4-> Solvable for \(k=1\)
+			\item<5-> \(\Rightarrow (G, 1) \in FAS\)
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Tournaments (T)}
+		\begin{center}
+			\includegraphics<1>[height=0.3\paperheight]{images/T/complete_graph_example.pdf}
+			\includegraphics<2->[height=0.3\paperheight]{images/T/tournament_example.pdf}
+		\end{center}
+		\begin{itemize}
+			\item<1-> Take a complete graph.
+			\item<2-> Assign every edge a direction.
+			\item<3-> \(T := \{ (G = (V, E)) | \forall u, v \in V : (u, v) \in E \veebar (v, u) \in E \}\)
+		\end{itemize}
+	\end{frame}
+	\begin{frame}[fragile]{Feedback Arc Set in Tournaments (FAST)}
+		\[	FAST := \{ (G = (V, E), k) | G \in T \land (G, k) \in FAS \} \]
+		\begin{center}
+			\includegraphics<2>[height=0.3\paperheight]{images/T/tournament_example.pdf}
+			\includegraphics<3->[height=0.3\paperheight]{images/FAST/fast_example.pdf}
+		\end{center}
+		\begin{itemize}
+			\item<3-> \((G, 1)\in FAST\)
+		\end{itemize}
 	\end{frame}
 
 	\section{Lemma 2.5}
