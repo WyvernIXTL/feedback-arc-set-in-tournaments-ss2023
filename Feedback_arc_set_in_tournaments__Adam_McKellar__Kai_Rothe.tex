@@ -55,6 +55,7 @@
 		\doclicenseThis
 	\end{frame}
 
+
 	\section{Feedback Arc Set in Tournaments}
 	\begin{frame}[fragile]{Feedback Arc Set (FAS)}
 		\begin{align*}			
@@ -99,13 +100,23 @@
 		\end{itemize}
 	\end{frame}
 
-	\section{Lemma 2.5}
+
+	\section{Lemma 2.5 (without proof)}
 	\begin{frame}[fragile]{Lemma 2.5}
-		\begin{itemize}[<+->]
-			\item first line
-		\end{itemize}
+		For a directed graph \(G\)
+		\[ G \text{ is acyclic } \Leftrightarrow  \forall (u,v) \in E(G) : u < v \]
+		\begin{center}
+			\includegraphics<2-3>[height=0.3\paperheight]{images/Lemma25/acyclic_graph.pdf}
+			\includegraphics<4->[height=0.3\paperheight]{images/Lemma25/cyclic_graph.pdf}
+		\end{center}
+		
+		\only<3>{ \(V = {a, b, c, d}\) \qquad \(E = {(a, b), (b, c), (c, d), (a, d)}\) \\
+		\(\Rightarrow a < b \land b < c \land c < d \land a < d \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\)	}
+	
+		\only<5->{ \(V = {a, b, c, d}\) \qquad \(E = {(a, b), (b, c), (c, d), (d, a)}\) \\
+		\(\Rightarrow a < b \land b < c \land c < d \land d < \dots \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\)}
 	\end{frame}
-	%TODO
+
 
 	\section{Observation 2.6}
 	%TODO
