@@ -40,11 +40,11 @@
 	imagemodifier={-80x15},
 ]{doclicense}
 
-\author{Adam McKellar\qquad Kai Rothe\qquad}
+\author{Adam McKellar\qquad Kai Rothe\qquad\quad}
 \title{Feedback Arc Set in Tournaments}
 \date{\today}
 
-\newcommand{\abs}[1]{\| #1 \|}
+\newcommand{\abs}[1]{\left| #1 \right|}
 
 \begin{document}
 	\frame{\titlepage}
@@ -116,10 +116,78 @@
 		\only<5->{ \(V = {a, b, c, d}\) \qquad \(E = {(a, b), (b, c), (c, d), (d, a)}\) \\
 		\(\Rightarrow a < b \land b < c \land c < d \land d < \dots \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\)}
 	\end{frame}
-
+	
 
 	\section{Observation 2.6}
-	%TODO
+	\begin{frame}[fragile]{\(\circledast\)}
+		\begin{center}
+			\includegraphics<1>[height=0.3\paperheight]{images/CircledAsterix/graph_G.pdf}
+			\includegraphics<2>[height=0.3\paperheight]{images/CircledAsterix/edges_f.pdf}
+			\includegraphics<3>[height=0.3\paperheight]{images/CircledAsterix/edges_revF.pdf}
+			\includegraphics<4>[height=0.3\paperheight]{images/CircledAsterix/graph_GrevF.pdf}
+		\end{center}
+		\begin{itemize}[<+->]
+			\item \(G = (V, E)\)
+			\item \(F \subseteq E(G)\)
+			\item \(rev(F) := \{(u, v) : (v, u) \in F\}\)
+			\item \[ G\circledast F := (V(G), \left( E(G) \cup rev(F) \right)\setminus F ) \]
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}[fragile]{Observation 2.6}
+		\begin{center}
+			\includegraphics<1>[height=0.3\paperheight]{images/Observation26/cyclic_graph_with_F.pdf}
+			\includegraphics<2>[height=0.3\paperheight]{images/Observation26/acyclic_G_ast_F.pdf}
+			\includegraphics<3>[height=0.3\paperheight]{images/Observation26/acyclic_G_without_FAS.pdf}
+		\end{center}
+		\only<+->{\[ 
+			F \subseteq E(G)	
+		\]}
+		\only<+->{\[ 
+			\land G\circledast F \text{ is a directed acyclic graph}
+		\]}
+		\only<+->{\[ 
+			\Rightarrow F \text{ is a feedback arc set of } G	
+		\]}
+	\end{frame}
+	\begin{frame}[fragile]{Lemma 2.5 \textit{implies} Observation 2.6}
+		\begin{center}
+			\includegraphics<1-2>[height=0.3\paperheight]{images/Observation26/cyclic_graph_with_F.pdf}
+			\includegraphics<3-4>[height=0.3\paperheight]{images/Observation26/acyclic_G_ast_F.pdf}
+			\includegraphics<5>[height=0.3\paperheight]{images/Observation26/acyclic_G_without_FAS.pdf}
+		\end{center}
+		\only<1->{\[ 
+			G = (V, E) \land G \text{ has Cycles } C_i	\land G \text{ is directed}
+			\]}
+		\only<2->{\[ 
+			\Rightarrow \not\forall (u, v) \in E(G) : u < v
+			\]}
+		\only<3->{\[
+				\Rightarrow \forall (u, v) \in E(G) : u \lessgtr v
+		\]}
+		\only<4->{\[
+			\forall (u, v) \in \left\{ (u,v) \in E(G) : u < v \right\} \cup  rev \left\{ (u,v) \in E(G) : u > v \right\} : u < v
+		\]}
+		\only<5->{\[ 
+			\Rightarrow \forall (u, v) \in \left\{ (u,v) \in E(G) : u < v \right\} : u < v
+			\]}
+	\end{frame}
+	\begin{frame}[fragile]{Lemma 2.5 \textit{implies} Observation 2.6 \--- Part 2}
+		\only<1->{\[ 
+			G\circledast F \text{ is acyclic } \Leftrightarrow \forall (u, v) \in (E(G) \cup  rev F)\setminus F : u < v
+			\]}
+		\only<2->{\[ 
+			\Rightarrow F \supseteq \left\{ (u,v) \in E(G) : u > v \right\}
+			\]}
+		\only<3->{\[
+			\Rightarrow \nexists (u, v) \in E(G) \setminus F : u > v
+			\]}
+		\only<4->{\[
+			\Rightarrow F \text{ is a feedback arc set of } G
+			\]
+		\small \[(G, \abs{F})\in FAS\]}
+	\end{frame}
+	
 	
 	\section{Lemma 2.7}
 	%TODO
