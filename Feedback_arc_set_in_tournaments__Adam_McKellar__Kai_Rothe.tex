@@ -211,16 +211,16 @@
 		\begin{center}
 			\includegraphics<1-2>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_F.pdf}
 			\includegraphics<3>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_without_F.pdf}
-			\includegraphics<4>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
+			\includegraphics<4->[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
 		\end{center}
 		\begin{enumerate}
 			\item<1-> \(  F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \)
 			\item<2-> let \(e_1, \dotsc , e_n \in F \)
 			\item<3-> \(\Rightarrow G\setminus F\) is acyclic
-			\item<4-> \( G\circledast F \) has a cycle \( C \)
+			\item<4-> \textbf{Assumption:} \( G\circledast F \) has a cycle \( C \)
 			\item<5-> \(\Rightarrow C \cup \left(E(G)\setminus F\right) \neq \left(E(G)\setminus F\right)\)
 			\item<6-> \(\Rightarrow \exists f \in C : f\in rev(F)\)
-			\item<7-> let \(f_1, \dotsc , f_l \in \left(C \cap rev(F)\right) \neq \emptyset\)
+			%\item<7-> let \(f_1, \dotsc , f_l \in \left(C \cap rev(F)\right) \neq \emptyset\)
 		\end{enumerate}
 	\end{frame}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Contradiction}
@@ -229,15 +229,16 @@
 			\includegraphics<3>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
 			\includegraphics<4->[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_C_and_C_of_i.pdf}
 		\end{center}
-		\only<+->{let \(C_i\) with \(1\leq i \leq n\) be cycles in \(G\)}
-		\only<+->{\[ 
-			F\text{ is minimal } \Rightarrow F \cap C_i = \{e_i\} \]}
-		 \begin{enumerate}[<+->]
+		\begin{itemize}[<+->]
+			\item let \(C_i\) with \(1\leq i \leq n\) be cycles in \(G\)
+			\item \( F\text{ is minimal } \Rightarrow F \cap C_i = \{e_i\} \)
+		\end{itemize}
+		\begin{enumerate}[<+->]
 		 	\item Traverse \(C\) in \(G\)
 		 	\item Instead of traversing \(f_i := rev(e_i)\), we traverse \(C_i - e_i\)
 		 	\item \(C\) can be traversed without edges of \(rev(F)\) or \(F\)
 		 	\item \textbf{Contradiction!} \(G\setminus F\) has a cycle!
-		 \end{enumerate}
+		\end{enumerate}
 	\end{frame}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Minimal}
 		\begin{itemize}[<+->]			
