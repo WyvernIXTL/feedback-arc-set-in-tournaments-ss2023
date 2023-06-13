@@ -8,7 +8,6 @@ Seminar presentation regarding Paramized Algorithm paper and the topic of Feedba
 | FAST | [x] | [] |
 | Lemma 2.5 | [x] | [] |
 | Observation 2.6 | [x] | [] |
-| Lemma 2.7a | [x] | [] |
-| Lemma 2.7b | [] | [] |
-| Lemma 2.7c | [] | [] |
+| Lemma 2.7 R | [x] | [] |
+| Lemma 2.7 L | [] | [] |
 | Theorem 2.8 | [] | [x] |
