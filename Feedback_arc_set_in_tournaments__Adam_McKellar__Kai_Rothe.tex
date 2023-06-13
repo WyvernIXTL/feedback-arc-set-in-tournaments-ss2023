@@ -40,6 +40,7 @@
 	imagemodifier={-80x15},
 ]{doclicense}
 
+
 \author{Adam McKellar\qquad Kai Rothe\qquad\quad}
 \title{Feedback Arc Set in Tournaments}
 \date{\today}
@@ -189,8 +190,81 @@
 	\end{frame}
 	
 	
+	\section{Lemma 2.7}
+	\begin{frame}[fragile]{Lemma 2.7}
+		\begin{align*}
+			&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+			&\Leftrightarrow \\
+			&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+		\end{align*}	
+	\end{frame}
+	
 	\section{Lemma 2.7 \(\Rightarrow\)}
-	%TODO
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)''}
+		\begin{align*}
+			&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+			&\Rightarrow \\
+			&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+		\end{align*}	
+	\end{frame}
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Assumptions}
+		\begin{center}
+			\includegraphics<1-2>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_F.pdf}
+			\includegraphics<3>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_without_F.pdf}
+			\includegraphics<4>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
+		\end{center}
+		\begin{enumerate}
+			\item<1-> \(  F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \)
+			\item<2-> let \(e_1, \dotsc , e_n \in F \)
+			\item<3-> \(\Rightarrow G\setminus F\) is acyclic
+			\item<4-> \( G\circledast F \) has a cycle \( C \)
+			\item<5-> \(\Rightarrow C \cup \left(E(G)\setminus F\right) \neq \left(E(G)\setminus F\right)\)
+			\item<6-> \(\Rightarrow \exists f \in C : f\in rev(F)\)
+			\item<7-> let \(f_1, \dotsc , f_l \in \left(C \cap rev(F)\right) \neq \emptyset\)
+		\end{enumerate}
+	\end{frame}
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Contradiction}
+		\begin{center}
+			\includegraphics<1-2>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_F_and_Cylce_of_G.pdf}
+			\includegraphics<3>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
+			\includegraphics<4->[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_C_and_C_of_i.pdf}
+		\end{center}
+		\only<+->{let \(C_i\) with \(1\leq i \leq n\) be cycles in \(G\)}
+		\only<+->{\[ 
+			F\text{ is minimal } \Rightarrow F \cap C_i = \{e_i\} \]}
+		 \begin{enumerate}[<+->]
+		 	\item Traverse \(C\) in \(G\)
+		 	\item Instead of traversing \(f_i := rev(e_i)\), we traverse \(C_i - e_i\)
+		 	\item \(C\) can be traversed without edges of \(rev(F)\) or \(F\)
+		 	\item \textbf{Contradiction!} \(G\setminus F\) has a cycle!
+		 \end{enumerate}
+	\end{frame}
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Minimal}
+		\begin{itemize}[<+->]			
+			\item We have shown:
+			\begin{align*}
+				&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+				&\Rightarrow \\
+				&\qquad G\circledast F \text{ is acyclic}
+			\end{align*}
+		
+			\item We still need to show:
+			\begin{align*}
+				&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+				&\Rightarrow \\
+				&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+			\end{align*}
+		\end{itemize}	
+	\end{frame}
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Minimal Proof}
+		\only<1->{\[ \text{if \quad} F \notin min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<2->{\[ \Rightarrow F' \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<3->{\[ \Rightarrow \abs{F'} < \abs{F} \]}
+		\only<4->{\[ G\circledast F' \text{ is acyclic } \stackrel{\text{Observation 2.6}}{\Rightarrow} F' \text{ is a feedback arc set of } G  \]}
+		\only<5->{\[ \Rightarrow F \notin  min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \]}
+		\only<6->{\textbf{Contradiction!}}
+	\end{frame}
+	
 	
 	\section{Lemma 2.7 \(\Leftarrow\)}
 	%TODO
