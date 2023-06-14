@@ -285,6 +285,182 @@
 	
 	
 	\section{Theorem 2.8: quadratic kernel for feedback arc sets in tournaments}
-	%TODO
+	\begin{frame}[fragile]{Theorem 2.8}
+		\textit{FAST} admits a kernel with at most \(k^{2} + 2k\) vertices. \newline 
+		\newline
+		\only<2->{ \(\exists\) algorithm \(\mathcal {A}\) returning in \textit{polynomial} time \(\mathcal{A}(G,k) = (G',k'): \) }
+		\begin{itemize}
+			\item<2-> \((G,k) \in FAST \Leftrightarrow (G', k') \in FAST \)
+			\item<2-> \(\abs{V(G')}\le k^2 + 2k \)
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Triangle}
+		A \textit{triangle} is a directed cycle of length three. 
+		%TODO: include triangle graphic
+		\only<2->{\begin{align*}
+			\Delta_{G} := \{& (e_1, e_2, e_3) \in E(G)^3 | \\
+			 		       & \exists v_1 \neq v_2 \neq v_3 \in V(G): \\
+					       & e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} 
+		\end{align*} }
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.1}
+		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). \newline 
+		%TODO: include graphics to explain ?
+		\newline
+		\uncover<2->{Let \((G,k)\) be an instance of FAST and
+		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]}
+		\uncover<3->{ \begin{align*}
+		& \mathbb{A}: \exists e \in G(E) \text{ contained in at least } k+1 \text{ triangles } \\
+		& \Rightarrow \forall F \in FAS_{(G,k)} : e \in F \\
+		\end{align*} }
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
+		Let \((G,k)\) be an instance of FAST and
+		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
+		\begin{align*}
+		& \mathbb{A}: (G,k) \in FAST  \\
+		& \Rightarrow \exists F \in FAS_{(G,k)} : e \in F \\
+		& \Rightarrow F \setminus \{e\} \in FAS_{(G \circledast \{e\},k-1)}  \\
+		& \Rightarrow (G',k') = (G \circledast \{e\},k-1) \in FAST
+		\end{align*}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
+		Let \((G',k') = (G \circledast \{e\}, k-1) \) be an instance of FAST and
+		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
+		
+		\uncover<2->{
+		\begin{align*}
+		& \mathbb{A}: \exists F' \in FAS_{(G',k')}: rev(e) \in F' \\
+		& \Rightarrow F' \setminus rev\{e\} \in FAS_{(G' \circledast rev\{e\},k')} \\
+		& \Rightarrow F' \setminus rev\{e\} \in FAS_{(G, k)} \\
+		& \Rightarrow \exists F \in FAS_{(G, k)}: e \neq F \Rightarrow \text{Contradiction!} \\ 
+		\end{align*}
+		}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
+		Let \((G',k') = (G \circledast \{e\}, k-1) \) be an instance of FAST and
+		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
+	
+		\begin{align*}
+		& \Rightarrow \forall F' \in FAS_{(G',k')}: rev(e) \notin F' \\ \\
+		& \mathbb{A}: (G',k') \in FAST \\
+		& \Rightarrow \exists F' \in FAS_{(G',k')}: \notin rev(e) \in F' \\
+		& \Rightarrow \exists F' \in FAS_{(G',k')}: F' \cup rev\{e\} \in FAS_{(G' \circledast rev\{e\},k')} \\
+		& \Rightarrow (G,k) = (G' \circledast rev\{e\},k'+1) \in FAST
+		\end{align*}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.1 - Polynomial time}
+		%TODO: Pseudocode
+		FAST.1 is a computable function in time bounded by
+		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{E(G)}^4) + \mathcal{O}(1) = \mathcal{O}(\abs{E(G)}^4) \]
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.2}
+		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
+		\uncover<2->{
+		 \begin{align*}
+		 & \mathbb{A}: (G,k) \in FAST \\
+		 & \Rightarrow \exists F \in FAS_{(G,k)} \\
+		 & \Rightarrow F-v \in FAS_{(G,k)} \\
+		 & \Rightarrow F-v \in FAS_{(G-v,k)} \\
+		 & \Rightarrow (G',k') = (G-v, k) \in FAST
+		 \end{align*}
+		 }
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
+		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
+   		\begin{align*}
+        		& V(G): G[ V' ] := (V', \{(u, v) \in E(G) | u, v \in V' \}) \forall V' \subset V \\
+        		& V^{\rightarrow v} := \{u \in V(G) | (u, v) \in E(G) \} \\
+        		& V^{\leftarrow v} := \{u \in V(G) | (v, u) \in E(G) \} \\
+		\\
+        		& \uncover<2->{ \Rightarrow \lnot \exists (u, w) \in E(G) : u \in V^{\leftarrow v} \land w \in V^{\rightarrow v} }
+        		\end{align*}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
+   		\begin{align*} %TODO: better alignment
+		& \mathbb{A}: (G',k') = (G-v, k) \in FAST \\
+        		& \Rightarrow \exists F' \in FAS_{(G-v, k)} \\
+        		& \Rightarrow F' \cap E(G-v[V^{\rightarrow v}]) \in FAS_{(G-v[V^{\rightarrow v}],n)} \\ 
+		& \land F' \cap E(G-v[V^{\leftarrow v}]) \in FAS_{(G-v[V^{\leftarrow v}],m)} \text{ for } n + m = k \\
+        		& \Rightarrow F^{\rightarrow v} := F' \cap E(G[V^{\rightarrow v}]) \in FAS_{(G[V^{\rightarrow v}],n)} \\ 
+		& \land F^{\leftarrow v} := F' \cap E(G[V^{\leftarrow v}]) \in FAS_{(G[V^{\leftarrow v}],m)} \text{ for } n + m = k \\
+        		& \Rightarrow F^{\rightarrow v} \cup F^{\leftarrow v} \in FAS_{(G[V^{\rightarrow v}] \cup G[V^{\leftarrow v}], n + m)} \\
+        		& \Rightarrow (G,k) = (G[V^{\rightarrow v}] \cup G[V^{\leftarrow v}], n+m) \in FAST
+    		\end{align*}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.2 - Polynomial time}
+		%TODO: Pseudocode
+		FAST.2 is a computable function in time bounded by
+		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) + \mathcal{O}(1) = \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) \]
+	\end{frame}
+	
+	\begin{frame}[fragile]{Theorem 2.8 - Proof}
+		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
+		\newline
+		\(\Rightarrow \exists F \in FAS_{(G,k)} : \)
+		\begin{multline*} 
+			\forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G, u \in V(G) : \right. \\ \left. e \in t \land ( (u, v) \in t \lor (v, u) \in t ) \} } \leq k+2
+		\end{multline*}
+		\begin{multline*}
+			\forall v \in V(G) : \exists t \in \Delta_G, u \in V(G): (v, u) \in t \lor (u, v) \in t 
+		\end{multline*}
+		
+	\end{frame}
+	
+	\begin{frame}[fragile]{Theorem 2.8 - Proof}
+		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
+		\newline
+		\(\Rightarrow \exists F \in FAS_{(G,k)} : \) 
+		\[ \forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G: e \in t \land e_v \in t \} } \leq k+2  \]
+		\[  \forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
+		where \( e_v \in t \Leftrightarrow \exists u \in V(G): (v, u) \in t \lor (u, v) \in t \)
+		
+		\uncover<2->{ 
+		\begin{align*}
+		\Rightarrow V(G) &= \{v \in V(G) | \exists t \in \Delta_G: e_v \in t \} \\
+		&= \{v \in V(G) | \exists e \in F, t \in \Delta_G: e \in t \land e_v \in t \} \\
+		&= \bigcup_{e \in F} \{v \in V(G) | t \in \Delta_G: e \in t \land e_v \in t \}
+		\end{align*}
+		}
+		
+	\end{frame}
+	
+	\begin{frame}[fragile]{Theorem 2.8 - Proof}
+		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
+		\newline
+		\(\Rightarrow \exists F \in FAS_{(G,k)} : \) 
+		\[ \forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G: e \in t \land e_v \in t \} } \leq k+2  \]
+		\[  \forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
+		where \( e_v \in t \Leftrightarrow \exists u \in V(G): (v, u) \in t \lor (u, v) \in t \)
+		
+		\begin{align*} 
+		\Rightarrow V(G) &=  \bigcup_{e \in F} \{v \in V(G) | t \in \Delta_G: e \in t \land e_v \in t \} \\
+		\only<2->{
+		\Rightarrow \abs{V(G)} & \leq \sum_{e \in F} \abs{ \{v \in V(G) | t \in \Delta_G: e \in t \land e_v \in t \} } \\
+		& \leq \sum_{e \in F} (k+2) \leq k(k+2) 
+		}
+		\end{align*}
+	\end{frame}
+	
+	\begin{frame}[fragile]{Theorem 2.8 - Proof}
+		\textit{FAST} admits a kernel with at most \(k^{2} + 2k\) vertices. \newline 
+		\newline
+		\(\exists\) algorithm \(\mathcal {A}\) returning in \textit{polynomial} time \(\mathcal{A}(G,k) = (G',k'): \)
+		\begin{itemize}
+			\item \((G,k) \in FAST \Leftrightarrow (G', k') \in FAST \)
+			\item \(\abs{V(G')} \leq k(k+2) = k^2 + 2k \)
+		\end{itemize}
+	\end{frame}
+
 	
 \end{document}
