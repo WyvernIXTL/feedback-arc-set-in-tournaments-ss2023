@@ -240,7 +240,7 @@
 		 	\item \textbf{Contradiction!} \(G\setminus F\) has a cycle!
 		\end{enumerate}
 	\end{frame}
-	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Minimal}
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- F is Minimal}
 		\begin{itemize}[<+->]			
 			\item We have shown:
 			\begin{align*}
@@ -257,7 +257,7 @@
 			\end{align*}
 		\end{itemize}	
 	\end{frame}
-	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Minimal Proof}
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- F is Minimal \--- Proof}
 		\only<1->{\[ \text{if \quad} F \notin min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<2->{\[ \Rightarrow F' \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<3->{\[ \Rightarrow \abs{F'} < \abs{F} \]}
@@ -268,7 +268,21 @@
 	
 	
 	\section{Lemma 2.7 \(\Leftarrow\)}
-	%TODO
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Leftarrow\)''}
+		\begin{align*}
+			&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+			&\Leftarrow \\
+			&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+		\end{align*}
+	\end{frame}
+	\begin{frame}[fragile]{Lemma 2.7 ``\(\Leftarrow\)'' \--- Proof}
+		\only<+->{\[ F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<+->{\[ \stackrel{\text{Observation 2.6}}{\Rightarrow} F \text{ is a Feedback Arc Set of } G \]}
+		\only<+->{\[ \text{if } \exists F' : \abs{F'} < \abs{F} \land F' \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<+->{\[ \stackrel{\text{Lemma 2.7 } \Rightarrow}{\Rightarrow} F' \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \]}
+		\only<6->{\textbf{Contradiction!}}
+	\end{frame}
+	
 	
 	\section{Theorem 2.8: quadratic kernel for feedback arc sets in tournaments}
 	%TODO
