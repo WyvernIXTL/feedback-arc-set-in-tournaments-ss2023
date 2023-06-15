@@ -347,11 +347,14 @@
 		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
 	
 		\begin{align*}
-		& \Rightarrow \forall F' \in FAS_{(G',k')}: rev(e) \notin F' \\ \\
+		& \Rightarrow \forall F' \in FAS_{(G',k')}: rev(e) \notin F' \\ 
+		\\
+		\uncover<2->{
 		& \mathbb{A}: (G',k') \in FAST \\
 		& \Rightarrow \exists F' \in FAS_{(G',k')}: \notin rev(e) \in F' \\
 		& \Rightarrow \exists F' \in FAS_{(G',k')}: F' \cup rev\{e\} \in FAS_{(G' \circledast rev\{e\},k')} \\
 		& \Rightarrow (G,k) = (G' \circledast rev\{e\},k'+1) \in FAST
+		}
 		\end{align*}
 	\end{frame}
 	
@@ -377,7 +380,7 @@
 	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
 		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
    		\begin{align*}
-        		& V(G): G[ V' ] := (V', \{(u, v) \in E(G) | u, v \in V' \}) \forall V' \subset V \\
+        		& \forall V' \subset V(G) : G[ V' ] := (V', \{(u, v) \in E(G) | u, v \in V' \}) \\
         		& V^{\rightarrow v} := \{u \in V(G) | (u, v) \in E(G) \} \\
         		& V^{\leftarrow v} := \{u \in V(G) | (v, u) \in E(G) \} \\
 		\\
