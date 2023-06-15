@@ -43,7 +43,7 @@
 
 \author{Adam McKellar\qquad Kai Rothe\qquad\quad}
 \title{Feedback Arc Set in Tournaments}
-\date{\today}
+\date{June 22, 2023} % date of presentation
 
 \newcommand{\abs}[1]{\left| #1 \right|}
 
@@ -111,10 +111,10 @@
 			\includegraphics<4->[height=0.3\paperheight]{images/Lemma25/cyclic_graph.pdf}
 		\end{center}
 		
-		\only<3>{ \(V = {a, b, c, d}\) \qquad \(E = {(a, b), (b, c), (c, d), (a, d)}\) \\
+		\only<3>{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), (a, d)\}\) \\
 		\(\Rightarrow a < b \land b < c \land c < d \land a < d \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\)	}
 	
-		\only<5->{ \(V = {a, b, c, d}\) \qquad \(E = {(a, b), (b, c), (c, d), (d, a)}\) \\
+		\only<5->{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), (d, a)\}\) \\
 		\(\Rightarrow a < b \land b < c \land c < d \land d < \dots \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\)}
 	\end{frame}
 	
@@ -145,48 +145,25 @@
 			F \subseteq E(G)	
 		\]}
 		\only<+->{\[ 
-			\land G\circledast F \text{ is a directed acyclic graph}
+			\text{if } G\circledast F \text{ is a directed acyclic graph}
 		\]}
 		\only<+->{\[ 
 			\Rightarrow F \text{ is a feedback arc set of } G	
 		\]}
 	\end{frame}
-	\begin{frame}[fragile]{Lemma 2.5 \textit{implies} Observation 2.6}
+	\begin{frame}[fragile]{Observation 2.6 \textit{ is implied by Lemma 2.5 }}
 		\begin{center}
-			\includegraphics<1-2>[height=0.3\paperheight]{images/Observation26/cyclic_graph_with_F.pdf}
-			\includegraphics<3-4>[height=0.3\paperheight]{images/Observation26/acyclic_G_ast_F.pdf}
-			\includegraphics<5>[height=0.3\paperheight]{images/Observation26/acyclic_G_without_FAS.pdf}
+			\includegraphics<1>[height=0.3\paperheight]{images/Observation26/cyclic_graph_with_F.pdf}
+			\includegraphics<2>[height=0.3\paperheight]{images/Observation26/acyclic_G_ast_F.pdf}
+			\includegraphics<3>[height=0.3\paperheight]{images/Observation26/acyclic_G_without_FAS.pdf}
 		\end{center}
-		\only<1->{\[ 
-			G = (V, E) \land G \text{ has Cycles } C_i	\land G \text{ is directed}
-			\]}
-		\only<2->{\[ 
-			\Rightarrow \not\forall (u, v) \in E(G) : u < v
-			\]}
-		\only<3->{\[
-				\Rightarrow \forall (u, v) \in E(G) : u \lessgtr v
-		\]}
-		\only<4->{\[
-			\forall (u, v) \in \left\{ (u,v) \in E(G) : u < v \right\} \cup  rev \left\{ (u,v) \in E(G) : u > v \right\} : u < v
-		\]}
-		\only<5->{\[ 
-			\Rightarrow \forall (u, v) \in \left\{ (u,v) \in E(G) : u < v \right\} : u < v
-			\]}
-	\end{frame}
-	\begin{frame}[fragile]{Lemma 2.5 \textit{implies} Observation 2.6 \--- Part 2}
-		\only<1->{\[ 
-			G\circledast F \text{ is acyclic } \Leftrightarrow \forall (u, v) \in (E(G) \cup  rev F)\setminus F : u < v
-			\]}
-		\only<2->{\[ 
-			\Rightarrow F \supseteq \left\{ (u,v) \in E(G) : u > v \right\}
-			\]}
-		\only<3->{\[
-			\Rightarrow \nexists (u, v) \in E(G) \setminus F : u > v
-			\]}
-		\only<4->{\[
-			\Rightarrow F \text{ is a feedback arc set of } G
-			\]
-		\small \[(G, \abs{F})\in FAS\]}
+		
+		\only<1>{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), (d, a)\}\) \\
+			\(\Rightarrow a < b \land b < c \land c < d \land d < \dots \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\) }
+	 	\only<2-3>{\(V = \{a, b, c, d\}\) \qquad \((E\cup rev(F))\setminus F = \{(a, b), (b, c), (c, d), \color{blue}(a, d)\}\) \\
+			\(\Rightarrow a < b \land b < c \land c < d \land \color{blue} a < d \color{black} \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\)}
+		\only<3>{\[ \Rightarrow   a < b \land b < c \land c < d \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\]}
+		
 	\end{frame}
 	
 	
