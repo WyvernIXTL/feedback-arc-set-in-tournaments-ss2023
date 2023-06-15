@@ -33,6 +33,11 @@
 \usecolortheme{beaver}
 \useinnertheme{circles}
 
+% pseudocode: 
+\usepackage[vlined]{algorithm2e}
+\DontPrintSemicolon
+\SetKw{KwCont}{continue}
+
 \usepackage[
 	type={CC},
 	modifier={by},
@@ -261,7 +266,7 @@
 	\end{frame}
 	
 	
-	\section{Theorem 2.8: quadratic kernel for feedback arc sets in tournaments}
+		\section{Theorem 2.8: quadratic kernel for feedback arc sets in tournaments}
 	\begin{frame}[fragile]{Theorem 2.8}
 		\textit{FAST} admits a kernel with at most \(k^{2} + 2k\) vertices. \newline 
 		\newline
@@ -336,9 +341,40 @@
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1 - Polynomial time}
-		%TODO: Pseudocode
-		FAST.1 is a computable function in time bounded by
-		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{E(G)}^4) + \mathcal{O}(1) = \mathcal{O}(\abs{E(G)}^4) \]
+		\begin{algorithm}[H]
+		\only<1-2>{
+		\KwData{\( (G, k) \) instance of FAST}
+		\KwResult{\( (G', k') \) reduced instance of FAST}
+		\BlankLine
+		}
+		\only<1>{
+		$\Delta := \{ \}$\;
+		\For{$e_1 = (u_1, v_1) \in E(G)$}{
+			\For{$e_2 = (u_2, v_2) \in E(G) \setminus \{e_1\}$}{
+				\For{$e_3 = (u_3, v_3) \in E(G) \setminus \{e_1, e_2\}$}{
+					\If{$(e_1, e_2, e_3)$ is a triangle, i.e. $v_1 = u_2, v_2 = u_3, v_3 = u_1$}{
+						put $(e_1, e_2, e_3)$ in $\Delta$\;
+					}
+				}
+			}
+		}
+		}
+		\only<2->{
+		\For{$e \in E(G)$}{
+			$k_e \gets 0$\;
+			\For{$t \in \Delta$}{
+				\If{$e \in t$}{$k_e \gets k_e + 1$\;}
+				\If{$k_e \geq k+1$}{\KwRet{$(G \circledast \{e\}, k-1)$}\;}
+			}
+		}
+		\KwRet{$(G,k)$}\;
+		}
+		\end{algorithm}
+		\only<3->{
+		\bigskip
+		$\Rightarrow$ FAST.1 is computable in polynomial time, e.g. bounded by
+		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{E(G)}^4) = \mathcal{O}(\abs{E(G)}^4) \]
+		}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2}
@@ -379,10 +415,40 @@
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2 - Polynomial time}
-		%TODO: Pseudocode
-		FAST.2 is a computable function in time bounded by
-		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) + \mathcal{O}(1) = \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) \]
-	\end{frame}
+		\begin{algorithm}[H]
+		\only<1-2>{
+		\KwData{\( (G, k) \) instance of FAST}
+		\KwResult{\( (G', k') \) reduced instance of FAST}
+		\BlankLine
+		}
+		\only<1>{
+		$\Delta := \{ \}$\;
+		\For{$e_1 = (u_1, v_1) \in E(G)$}{
+			\For{$e_2 = (u_2, v_2) \in E(G) \setminus \{e_1\}$}{
+				\For{$e_3 = (u_3, v_3) \in E(G) \setminus \{e_1, e_2\}$}{
+					\If{$(e_1, e_2, e_3)$ is a triangle, i.e. $v_1 = u_2, v_2 = u_3, v_3 = u_1$}{
+						put $(e_1, e_2, e_3)$ in $\Delta$\;
+					}
+				}
+			}
+		}
+		}
+		\only<2->{
+		\For{$v \in V(G)$}{
+			\For{$t \in \Delta$}{
+				\If{$v \in t$}{\KwCont \;}
+			}
+			\KwRet{$(G-v,k)$}\;
+		}
+		\KwRet{$(G,k)$}\;
+		}
+		\end{algorithm}
+		\only<3->{
+		\bigskip
+		$\Rightarrow$ FAST.2 is computable in polynomial time, e.g. bounded by
+		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) + \mathcal{O}(\abs{E(G)}) = \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) \]
+		}
+		\end{frame}
 	
 	\begin{frame}[fragile]{Theorem 2.8 - Proof}
 		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
@@ -432,6 +498,33 @@
 		\end{align*}
 	\end{frame}
 	
+	% Define recursive Function for pseudocode
+	\RestyleAlgo{ruled}
+	\begin{frame}[fragile]{Theorem 2.8 - FAST Kernel}
+	\begin{function}[H]
+		\caption{Kernel(G, k)}
+		\KwData{\( (G, k) \) instance of FAST}
+		\KwResult{\( (G', k') \) reduced instance of FAST}
+		\BlankLine
+		\If{$(G',k') =$ FAST.1$(G,k) \neq (G,k)$}{Kernel(G',k')}
+		\If{$(G',k') =$ FAST.2$(G,k) \neq (G,k)$}{Kernel(G',k')}
+		\If{$\abs{V(G)} > k(k+2)$}{\KwRet{No-Instance of FAST}}
+		\KwRet{$(G,k)$}
+	\end{function}
+	\only<1>{
+	where a No-Instance of FAST might be $(G',k' = 0)$ with
+	\begin{gather*}
+	V(G') = \{v_1 \neq v_2 \neq v_3 \in V(G)\} \\ E(G') = \{(v_1, v_2), (v_2, v_3), (v_3, v_1) | v_1 \neq v_2 \neq v_3 \in V(G')\}) 
+	\end{gather*}
+		}
+	\only<2->{
+	\bigskip
+	$\Rightarrow$ FAST Kernel computable in polynomial time, e.g. bounded by
+	\[ \mathcal{O}(k \cdot \abs{E(G)}^3) + \mathcal{O}(\abs{V(G)}^2 \cdot \abs{E(G)}^3) = \mathcal{O}(k \cdot \abs{V(G)}^2 \cdot \abs{E(G)}^3) \]
+	}
+	
+	\end{frame}
+	
 	\begin{frame}[fragile]{Theorem 2.8 - Proof}
 		\textit{FAST} admits a kernel with at most \(k^{2} + 2k\) vertices. \newline 
 		\newline
@@ -441,6 +534,5 @@
 			\item \(\abs{V(G')} \leq k(k+2) = k^2 + 2k \)
 		\end{itemize}
 	\end{frame}
-
 	
 \end{document}
