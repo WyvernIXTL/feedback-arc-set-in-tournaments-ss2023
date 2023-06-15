@@ -112,10 +112,10 @@
 		\end{center}
 		
 		\only<3>{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), (a, d)\}\) \\
-		\(\Rightarrow a < b \land b < c \land c < d \land a < d \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\)	}
+			\(\Rightarrow a < b \land b < c \land c < d \land a < d \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\)	}
 	
-		\only<5->{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), (d, a)\}\) \\
-		\(\Rightarrow a < b \land b < c \land c < d \land d < \dots \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\)}
+		\only<5->{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), \color{red} (d, a) \color{black} \}\) \\
+			\(\Rightarrow a < b \land b < c \land c < d \land \color{red} d < a \color{black} \Rightarrow a < d \land  \color{red} d < a \color{black} \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\) }
 	\end{frame}
 	
 
@@ -158,9 +158,9 @@
 			\includegraphics<3>[height=0.3\paperheight]{images/Observation26/acyclic_G_without_FAS.pdf}
 		\end{center}
 		
-		\only<1>{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), (d, a)\}\) \\
-			\(\Rightarrow a < b \land b < c \land c < d \land d < \dots \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\) }
-	 	\only<2-3>{\(V = \{a, b, c, d\}\) \qquad \((E\cup rev(F))\setminus F = \{(a, b), (b, c), (c, d), \color{blue}(a, d)\}\) \\
+		\only<1>{ \(V = \{a, b, c, d\}\) \qquad \(E = \{(a, b), (b, c), (c, d), \color{red} (d, a) \color{black} \}\) \\
+			\(\Rightarrow a < b \land b < c \land c < d \land \color{red} d < \dotsc \color{black} \Rightarrow \text{ no total order } \Rightarrow \text{ cyclic }\) }
+	 	\only<2-3>{\(V = \{a, b, c, d\}\) \qquad \((E\cup rev(F))\setminus F = \{(a, b), (b, c), (c, d), \color{blue}(a, d) \color{black} \}\) \\
 			\(\Rightarrow a < b \land b < c \land c < d \land \color{blue} a < d \color{black} \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\)}
 		\only<3>{\[ \Rightarrow   a < b \land b < c \land c < d \Rightarrow a < b < c < d \Rightarrow \text{ acyclic}\]}
 		
@@ -193,10 +193,10 @@
 		\begin{enumerate}
 			\item<1-> \(  F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \)
 			\item<2-> let \(e_1, \dotsc , e_n \in F \)
-			\item<3-> \(\Rightarrow G\setminus F\) is acyclic
+			\item<3-> \(\Rightarrow G' = \left(V(G), E(G)\setminus F\right) \) is acyclic
 			\item<4-> \textbf{Assumption:} \( G\circledast F \) has a cycle \( C \)
-			\item<5-> \(\Rightarrow C \cup \left(E(G)\setminus F\right) \neq \left(E(G)\setminus F\right)\)
-			\item<6-> \(\Rightarrow \exists f \in C : f\in rev(F)\)
+			\item<5-> \(\Rightarrow E(C) \cup \left(E(G)\setminus F\right) \neq \left(E(G)\setminus F\right)\)
+			\item<6-> \(\Rightarrow \exists f \in E(C) : f\in rev(F)\)
 			%\item<7-> let \(f_1, \dotsc , f_l \in \left(C \cap rev(F)\right) \neq \emptyset\)
 		\end{enumerate}
 	\end{frame}
@@ -208,13 +208,13 @@
 		\end{center}
 		\begin{itemize}[<+->]
 			\item let \(C_i\) with \(1\leq i \leq n\) be cycles in \(G\)
-			\item \( F\text{ is minimal } \Rightarrow F \cap C_i = \{e_i\} \)
+			\item \( F\text{ is minimal } \Rightarrow F \cap E(C_i) = \{e_i\} \)
 		\end{itemize}
 		\begin{enumerate}[<+->]
 		 	\item Traverse \(C\) in \(G\)
 		 	\item Instead of traversing \(f_i := rev(e_i)\), we traverse \(C_i - e_i\)
 		 	\item \(C\) can be traversed without edges of \(rev(F)\) or \(F\)
-		 	\item \textbf{Contradiction!} \(G\setminus F\) has a cycle!
+		 	\item \textbf{Contradiction!} \(G' = \left(V(G), E(G)\setminus F\right)\) has a cycle!
 		\end{enumerate}
 	\end{frame}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- F is Minimal}
@@ -255,9 +255,9 @@
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Leftarrow\)'' \--- Proof}
 		\only<+->{\[ F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<+->{\[ \stackrel{\text{Observation 2.6}}{\Rightarrow} F \text{ is a Feedback Arc Set of } G \]}
-		\only<+->{\[ \text{if } \exists F' : \abs{F'} < \abs{F} \land F' \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
-		\only<+->{\[ \stackrel{\text{Lemma 2.7 } \Rightarrow}{\Rightarrow} F' \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \]}
-		\only<6->{\textbf{Contradiction!}}
+		\only<+->{\[ \text{if } \exists F' : \abs{F'} < \abs{F} \land F' \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \]}
+		\only<+->{\[ \stackrel{\text{Lemma 2.7 } \Rightarrow}{\Rightarrow} F' \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<+->{\textbf{Contradiction!}}
 	\end{frame}
 	
 	
