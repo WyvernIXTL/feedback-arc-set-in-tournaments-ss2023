@@ -38,6 +38,9 @@
 \DontPrintSemicolon
 \SetKw{KwCont}{continue}
 
+% images:
+\usepackage{wrapfig}
+
 \usepackage[
 	type={CC},
 	modifier={by},
@@ -278,36 +281,49 @@
 	\end{frame}
 	
 	\begin{frame}[fragile]{Triangle}
+		\begin{center}
+			\includegraphics[height=0.3\paperheight]{images/Triangle/Triangle.pdf}
+		\end{center}
 		A \textit{triangle} is a directed cycle of length three. 
-		%TODO: include triangle graphic
-		\only<2->{\begin{align*}
+		\uncover<2->{
+		\begin{align*}
 			\Delta_{G} := \{& (e_1, e_2, e_3) \in E(G)^3 | \\
 			 		       & \exists v_1 \neq v_2 \neq v_3 \in V(G): \\
 					       & e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} 
-		\end{align*} }
+		\end{align*} 
+		}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1}
 		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). \newline 
 		%TODO: include graphics to explain ?
-		\newline
-		\uncover<2->{Let \((G,k)\) be an instance of FAST and
-		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]}
-		\uncover<3->{ \begin{align*}
-		& \mathbb{A}: \exists e \in G(E) \text{ contained in at least } k+1 \text{ triangles } \\
-		& \Rightarrow \forall F \in FAS_{(G,k)} : e \in F \\
-		\end{align*} }
+		\uncover<2->{
+		\begin{center}
+		\includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2.pdf}
+		\includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2Rev.pdf}
+		\end{center}
+		}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
+		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). \newline 
+		\newline
 		Let \((G,k)\) be an instance of FAST and
 		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
+		\only<2>{ 
+		\begin{align*}
+		& \mathbb{A}: \exists e \in G(E) \text{ contained in at least } k+1 \text{ triangles } \\
+		& \Rightarrow \forall F \in FAS_{(G,k)} : e \in F
+		\end{align*} 
+		}
+		\only<3>{
 		\begin{align*}
 		& \mathbb{A}: (G,k) \in FAST  \\
 		& \Rightarrow \exists F \in FAS_{(G,k)} : e \in F \\
 		& \Rightarrow F \setminus \{e\} \in FAS_{(G \circledast \{e\},k-1)}  \\
 		& \Rightarrow (G',k') = (G \circledast \{e\},k-1) \in FAST
 		\end{align*}
+		}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
@@ -333,8 +349,8 @@
 		\\
 		\uncover<2->{
 		& \mathbb{A}: (G',k') \in FAST \\
-		& \Rightarrow \exists F' \in FAS_{(G',k')}: \notin rev(e) \in F' \\
-		& \Rightarrow \exists F' \in FAS_{(G',k')}: F' \cup rev\{e\} \in FAS_{(G' \circledast rev\{e\},k')} \\
+		& \Rightarrow \exists F' \in FAS_{(G',k')}: rev(e) \notin F' \\
+		& \Rightarrow \exists F' \in FAS_{(G',k')}: F' \cup \{e\} \in FAS_{(G' \circledast rev\{e\},k'+1)} \\
 		& \Rightarrow (G,k) = (G' \circledast rev\{e\},k'+1) \in FAST
 		}
 		\end{align*}
@@ -360,6 +376,8 @@
 		}
 		}
 		\only<2->{
+		$\Delta = \{(e_1, e_2, e_3) \in E(G)^3 | \exists v_1 \neq v_2 \neq v_3 \in V(G): e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} $\;
+		\BlankLine	
 		\For{$e \in E(G)$}{
 			$k_e \gets 0$\;
 			\For{$t \in \Delta$}{
@@ -380,6 +398,15 @@
 	\begin{frame}[fragile]{Reduction FAST.2}
 		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
 		\uncover<2->{
+		\begin{center}
+		\includegraphics[height=0.5\paperheight]{images/FAST_2/GraphWithVertex.pdf}
+		\includegraphics[height=0.5\paperheight]{images/FAST_2/GraphWithoutVertex.pdf}
+		\end{center}
+		 }
+	\end{frame}
+	
+	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
+		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
 		 \begin{align*}
 		 & \mathbb{A}: (G,k) \in FAST \\
 		 & \Rightarrow \exists F \in FAS_{(G,k)} \\
@@ -387,22 +414,32 @@
 		 & \Rightarrow F-v \in FAS_{(G-v,k)} \\
 		 & \Rightarrow (G',k') = (G-v, k) \in FAST
 		 \end{align*}
-		 }
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
 		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
    		\begin{align*}
-        		& \forall V' \subset V(G) : G[ V' ] := (V', \{(u, v) \in E(G) | u, v \in V' \}) \\
         		& V^{\rightarrow v} := \{u \in V(G) | (u, v) \in E(G) \} \\
-        		& V^{\leftarrow v} := \{u \in V(G) | (v, u) \in E(G) \} \\
-		\\
-        		& \uncover<2->{ \Rightarrow \lnot \exists (u, w) \in E(G) : u \in V^{\leftarrow v} \land w \in V^{\rightarrow v} }
+        		& V^{\leftarrow v} := \{u \in V(G) | (v, u) \in E(G) \}
         		\end{align*}
+		\begin{center}
+		\includegraphics[height=0.3\paperheight]{images/FAST_2/GraphV.pdf}
+		\uncover<2->{ \includegraphics[height=0.3\paperheight]{images/FAST_2/GraphVCircle.pdf} }
+		\end{center}
+		 \uncover<2->{\[\Rightarrow \nexists (u, w) \in E(G) : u \in V^{\leftarrow v} \land w \in V^{\rightarrow v} \]}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
-   		\begin{align*} %TODO: better alignment
+		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament. \\
+		\medskip
+		\qquad \( \forall V' \subset V(G) : G[ V' ] := (V', \{(u, v) \in E(G) | u, v \in V' \}) \)
+		
+		\begin{wrapfigure}{R}{0.2\textwidth}
+   			\centering
+			\includegraphics[width = 0.2\textwidth]{images/FAST_2/GraphV2.pdf}
+		\end{wrapfigure}
+		
+		\begin{align*} %TODO: better alignment
 		& \mathbb{A}: (G',k') = (G-v, k) \in FAST \\
         		& \Rightarrow \exists F' \in FAS_{(G-v, k)} \\
         		& \Rightarrow F' \cap E(G-v[V^{\rightarrow v}]) \in FAS_{(G-v[V^{\rightarrow v}],n)} \\ 
@@ -412,6 +449,7 @@
         		& \Rightarrow F^{\rightarrow v} \cup F^{\leftarrow v} \in FAS_{(G[V^{\rightarrow v}] \cup G[V^{\leftarrow v}], n + m)} \\
         		& \Rightarrow (G,k) = (G[V^{\rightarrow v}] \cup G[V^{\leftarrow v}], n+m) \in FAST
     		\end{align*}
+		
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2 - Polynomial time}
@@ -434,6 +472,8 @@
 		}
 		}
 		\only<2->{
+		$\Delta = \{(e_1, e_2, e_3) \in E(G)^3 | \exists v_1 \neq v_2 \neq v_3 \in V(G): e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} $\;
+		\BlankLine			 
 		\For{$v \in V(G)$}{
 			\For{$t \in \Delta$}{
 				\If{$v \in t$}{\KwCont \;}
@@ -451,24 +491,26 @@
 		\end{frame}
 	
 	\begin{frame}[fragile]{Theorem 2.8 - Proof}
-		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
-		\newline
+		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline \newline
 		\(\Rightarrow \exists F \in FAS_{(G,k)} : \)
-		\begin{multline*} 
-			\forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G, u \in V(G) : \right. \\ \left. e \in t \land ( (u, v) \in t \lor (v, u) \in t ) \} } \leq k+2
-		\end{multline*}
 		\begin{multline*}
 			\forall v \in V(G) : \exists t \in \Delta_G, u \in V(G): (v, u) \in t \lor (u, v) \in t 
 		\end{multline*}
-		
+		\uncover<2>{\begin{multline*} 
+			\forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G, u \in V(G) : \right. \\ \left. e \in t \land ( (u, v) \in t \lor (v, u) \in t ) \} } \leq k+2
+		\end{multline*}
+		\begin{center}
+			\includegraphics[height = 0.3\pageheight]{images/Theorem28/TrianglesWithE.pdf}
+		\end{center}
+		}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Theorem 2.8 - Proof}
 		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
 		\newline
 		\(\Rightarrow \exists F \in FAS_{(G,k)} : \) 
+		\[\forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
 		\[ \forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G: e \in t \land e_v \in t \} } \leq k+2  \]
-		\[  \forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
 		where \( e_v \in t \Leftrightarrow \exists u \in V(G): (v, u) \in t \lor (u, v) \in t \)
 		
 		\uncover<2->{ 
@@ -485,8 +527,8 @@
 		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
 		\newline
 		\(\Rightarrow \exists F \in FAS_{(G,k)} : \) 
+		\[\forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
 		\[ \forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G: e \in t \land e_v \in t \} } \leq k+2  \]
-		\[  \forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
 		where \( e_v \in t \Leftrightarrow \exists u \in V(G): (v, u) \in t \lor (u, v) \in t \)
 		
 		\begin{align*} 

@@ -1,0 +1,28 @@
+<mxfile host="app.diagrams.net" modified="2023-06-17T05:53:41.974Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Safari/605.1.15" etag="MR6YCbLJ-fPfkveAQlaq" version="21.4.0" type="device">
+  <diagram name="Seite-1" id="1lOM7LZerqZPnMOpxiHa">
+    <mxGraphModel dx="478" dy="319" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="12iBxm_VB4zqUITPJ39q-1" value="" style="endArrow=classic;html=1;rounded=0;endFill=1;startArrow=oval;startFill=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="200" y="200" as="sourcePoint" />
+            <mxPoint x="280" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12iBxm_VB4zqUITPJ39q-2" value="" style="endArrow=classic;html=1;rounded=0;startArrow=oval;startFill=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="120" as="sourcePoint" />
+            <mxPoint x="360" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="12iBxm_VB4zqUITPJ39q-3" value="" style="endArrow=classic;html=1;rounded=0;startArrow=oval;startFill=0;strokeColor=default;snapToPoint=0;ignoreEdge=0;comic=0;enumerate=0;orthogonal=0;orthogonalLoop=0;flowAnimation=0;noJump=0;backgroundOutline=0;fixDash=0;anchorPointDirection=1;endFill=1;shadow=0;endSize=6;targetPerimeterSpacing=0;startSize=6;sourcePerimeterSpacing=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="360" y="200" as="sourcePoint" />
+            <mxPoint x="200" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
