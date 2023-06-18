@@ -281,10 +281,10 @@
 	\end{frame}
 	
 	\begin{frame}[fragile]{Triangle}
+		A \textit{triangle} is a directed cycle of length three. 
 		\begin{center}
 			\includegraphics[height=0.3\paperheight]{images/Triangle/Triangle.pdf}
 		\end{center}
-		A \textit{triangle} is a directed cycle of length three. 
 		\uncover<2->{
 		\begin{align*}
 			\Delta_{G} := \{& (e_1, e_2, e_3) \in E(G)^3 | \\
@@ -312,7 +312,7 @@
 		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
 		\only<2>{ 
 		\begin{align*}
-		& \mathbb{A}: \exists e \in G(E) \text{ contained in at least } k+1 \text{ triangles } \\
+		& \mathbb{A}: \exists e \in E(G) \text{ contained in at least } k+1 \text{ triangles } \\
 		& \Rightarrow \forall F \in FAS_{(G,k)} : e \in F
 		\end{align*} 
 		}
