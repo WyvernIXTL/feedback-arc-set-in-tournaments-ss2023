@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2023-06-13T15:00:49.602Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.3.7 Chrome/112.0.5615.204 Electron/24.5.0 Safari/537.36" etag="ZiAz5JiAYfFoNEPHBahl" version="21.3.7" type="device">
+<mxfile host="Electron" modified="2023-06-19T21:52:37.839Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.0 Chrome/112.0.5615.204 Electron/24.5.1 Safari/537.36" etag="DFgcUm0prhoSFdhQfsAL" version="21.5.0" type="device">
   <diagram name="Page-1" id="V5jDszUlmnTWUOPBSBF2">
-    <mxGraphModel dx="1608" dy="1092" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
+    <mxGraphModel dx="536" dy="364" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -46,7 +46,7 @@
             <mxPoint x="420" y="550" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="P6_PLEU_mZZHy8y2LjJ5-10" value="&lt;h2&gt;&lt;font color=&quot;#a20025&quot;&gt;\(rev( e_1 ) : e_1 \in F\)&lt;/font&gt;&lt;/h2&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+        <mxCell id="P6_PLEU_mZZHy8y2LjJ5-10" value="&lt;h2&gt;&lt;font color=&quot;#a20025&quot;&gt;\( f \in rev(F)\)&lt;/font&gt;&lt;/h2&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="350" y="581.25" width="167" height="37.5" as="geometry" />
         </mxCell>
         <mxCell id="P6_PLEU_mZZHy8y2LjJ5-11" value="&lt;h2&gt;G&lt;/h2&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">

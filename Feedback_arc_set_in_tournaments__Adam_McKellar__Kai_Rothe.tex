@@ -113,7 +113,7 @@
 	\section{Lemma 2.5 (without proof)}
 	\begin{frame}[fragile]{Lemma 2.5}
 		For a directed graph \(G\)
-		\[ G \text{ is acyclic } \Leftrightarrow  \forall (u,v) \in E(G) : u < v \]
+		\[ G \text{ is acyclic } \Leftrightarrow \underbrace{\bigvee_< \forall (u,v) \in E(G) : u < v}_\text{exists a topological order} \]
 		\begin{center}
 			\includegraphics<2-3>[height=0.3\paperheight]{images/Lemma25/acyclic_graph.pdf}
 			\includegraphics<4->[height=0.3\paperheight]{images/Lemma25/cyclic_graph.pdf}
@@ -139,7 +139,7 @@
 			\item \(G = (V, E)\)
 			\item \(F \subseteq E(G)\)
 			\item \(rev(F) := \{(u, v) : (v, u) \in F\}\)
-			\item \[ G\circledast F := (V(G), \left( E(G) \cup rev(F) \right)\setminus F ) \]
+			\item \large \[ G\circledast F := \left( V(G), \left( E(G) \setminus F \right) \cup rev(F) \right)  \]
 		\end{itemize}
 	\end{frame}
 
@@ -176,51 +176,57 @@
 	
 	
 	\section{Lemma 2.7}
+	\begin{frame}[fragile]{\(\min\)}
+		\[ \text{for } S \subset \mathcal{P}(E(G)) \]
+		\[ \min S := \left\{ M \in S : \forall M' \in S : \abs{M} \leq \abs{M'} \right\} \]
+	\end{frame}
+	
 	\begin{frame}[fragile]{Lemma 2.7}
 		\begin{align*}
-			&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+			&\qquad F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
 			&\Leftrightarrow \\
-			&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+			&\qquad F \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
 		\end{align*}	
 	\end{frame}
 	
 	\section{Lemma 2.7 \(\Rightarrow\)}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)''}
 		\begin{align*}
-			&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+			&\qquad F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
 			&\Rightarrow \\
-			&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+			&\qquad F \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
 		\end{align*}	
 	\end{frame}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Assumptions}
 		\begin{center}
-			\includegraphics<1-2>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_F.pdf}
-			\includegraphics<3>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_without_F.pdf}
-			\includegraphics<4->[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
+			\includegraphics<1>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_F.pdf}
+			\includegraphics<2>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_without_F.pdf}
+			\includegraphics<3-5>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
+			\includegraphics<6>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C_2.pdf}
 		\end{center}
 		\begin{enumerate}
-			\item<1-> \(  F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \)
-			\item<2-> let \(e_1, \dotsc , e_n \in F \)
-			\item<3-> \(\Rightarrow G' = \left(V(G), E(G)\setminus F\right) \) is acyclic
-			\item<4-> \textbf{Assumption:} \( G\circledast F \) has a cycle \( C \)
-			\item<5-> \(\Rightarrow E(C) \cup \left(E(G)\setminus F\right) \neq \left(E(G)\setminus F\right)\)
-			\item<6-> \(\Rightarrow \exists f \in E(C) : f\in rev(F)\)
-			%\item<7-> let \(f_1, \dotsc , f_l \in \left(C \cap rev(F)\right) \neq \emptyset\)
+			\item<1-> \(  F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \)
+			\item<2-> \(\Rightarrow G' = \left(V(G), E(G)\setminus F\right) \) is acyclic
+			\item<3-> \textbf{Assumption:} \( G\circledast F \) has a cycle \( \color{blue} C \)
+			\item<4-> \(\Rightarrow E(C) \cup \left(E(G)\setminus F\right) \neq \left(E(G)\setminus F\right)\)
+			\item<5-> \(\Rightarrow \exists f \in E(C) : f\in rev(F)\)
+			\item<6-> \( \left\{ f_1, f_2, \dotsc, f_n \right\} = C \cap rev(F) \) in order of their appearance in \(C\) \\
+			\quad \( \left\{ e_1, \dotsc , e_n \right\} =  rev( \left\{ f_1, \dotsc, f_n \right\} ) \)			
 		\end{enumerate}
 	\end{frame}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- Contradiction}
 		\begin{center}
 			\includegraphics<1-2>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_F_and_Cylce_of_G.pdf}
-			\includegraphics<3>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C.pdf}
+			\includegraphics<3>[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_Edge_of_revF_and_Cycle_C_2.pdf}
 			\includegraphics<4->[height=0.3\paperheight]{images/Lemma27/Abstract_Graph_G_with_C_and_C_of_i.pdf}
 		\end{center}
 		\begin{itemize}[<+->]
-			\item let \(C_i\) with \(1\leq i \leq n\) be cycles in \(G\)
-			\item \( F\text{ is minimal } \Rightarrow F \cap E(C_i) = \{e_i\} \)
+			\item \(F\text{ is minimal } \Rightarrow \text{ for each } e_i \text{ exists exactly one cycle } C_i \text{ of } G \text{ with } 1\leq i \leq n \)
+			\item \( F \cap E(C_i) = \{e_i\} \)
 		\end{itemize}
 		\begin{enumerate}[<+->]
 		 	\item Traverse \(C\) in \(G\)
-		 	\item Instead of traversing \(f_i := rev(e_i)\), we traverse \(C_i - e_i\)
+		 	\item Instead of traversing \(f_i = rev(e_i)\), we traverse \(C_i - e_i\)
 		 	\item \(C\) can be traversed without edges of \(rev(F)\) or \(F\)
 		 	\item \textbf{Contradiction!} \(G' = \left(V(G), E(G)\setminus F\right)\) has a cycle!
 		\end{enumerate}
@@ -229,25 +235,30 @@
 		\begin{itemize}[<+->]			
 			\item We have shown:
 			\begin{align*}
-				&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+				&\qquad F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
 				&\Rightarrow \\
 				&\qquad G\circledast F \text{ is acyclic}
 			\end{align*}
 		
 			\item We still need to show:
 			\begin{align*}
-				&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+				&\qquad F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
 				&\Rightarrow \\
-				&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+				&\qquad F \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
 			\end{align*}
 		\end{itemize}	
 	\end{frame}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Rightarrow\)'' \--- F is Minimal \--- Proof}
-		\only<1->{\[ \text{if \quad} F \notin min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
-		\only<2->{\[ \Rightarrow F' \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
-		\only<3->{\[ \Rightarrow \abs{F'} < \abs{F} \]}
-		\only<4->{\[ G\circledast F' \text{ is acyclic } \stackrel{\text{Observation 2.6}}{\Rightarrow} F' \text{ is a feedback arc set of } G  \]}
-		\only<5->{\[ \Rightarrow F \notin  min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \]}
+		\only<1->{
+			\begin{align*}
+				\text{let \quad} &F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+				\text{if \quad} &F \notin \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+			\end{align*}
+		}
+		\only<2->{\[ \Rightarrow F'' \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<3->{\[ \Rightarrow \abs{F''} < \abs{F} \]}
+		\only<4->{\[ G\circledast F'' \text{ is acyclic } \stackrel{\text{Observation 2.6}}{\Rightarrow} F'' \text{ is a feedback arc set of } G  \]}
+		\only<5->{\[ \Rightarrow F \notin  \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \]}
 		\only<6->{\textbf{Contradiction!}}
 	\end{frame}
 	
@@ -255,16 +266,16 @@
 	\section{Lemma 2.7 \(\Leftarrow\)}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Leftarrow\)''}
 		\begin{align*}
-			&\qquad F \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
+			&\qquad F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \\
 			&\Leftarrow \\
-			&\qquad F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
+			&\qquad F \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\}
 		\end{align*}
 	\end{frame}
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Leftarrow\)'' \--- Proof}
-		\only<+->{\[ F \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<+->{\[ F \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<+->{\[ \stackrel{\text{Observation 2.6}}{\Rightarrow} F \text{ is a Feedback Arc Set of } G \]}
-		\only<+->{\[ \text{if } \exists F' : \abs{F'} < \abs{F} \land F' \in min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} \]}
-		\only<+->{\[ \stackrel{\text{Lemma 2.7 } \Rightarrow}{\Rightarrow} F' \in min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
+		\only<+->{\[ \text{if } \exists F'' : \left( \abs{F''} < \abs{F} \right) \land \left( F'' \in \min \left\{ F' \subset E(G) | F' \text{ is a FAS of } G \right\} \right) \]}
+		\only<+->{\[ \stackrel{\text{Lemma 2.7 } \Rightarrow}{\Rightarrow} F'' \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<+->{\textbf{Contradiction!}}
 	\end{frame}
 	
