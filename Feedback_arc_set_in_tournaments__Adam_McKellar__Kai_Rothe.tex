@@ -274,7 +274,8 @@
 	\begin{frame}[fragile]{Lemma 2.7 ``\(\Leftarrow\)'' \--- Proof}
 		\only<+->{\[ F \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<+->{\[ \stackrel{\text{Observation 2.6}}{\Rightarrow} F \text{ is a Feedback Arc Set of } G \]}
-		\only<+->{\[ \text{if } \exists F'' : \left( \abs{F''} < \abs{F} \right) \land \left( F'' \in \min \left\{ F' \subset E(G) | F' \text{ is a FAS of } G \right\} \right) \]}
+		\only<+->{\[ \text{if } \exists F''\subsetneq F : F''\in \min \left\{ F' \subset E(G) | F' \text{ is a FAS of } G \right\} \]}
+		\only<+->{\[ \Rightarrow \exists F'' : \left( \abs{F''} < \abs{F} \right) \land \left( F'' \in \min \left\{ F' \subset E(G) | F' \text{ is a FAS of } G \right\} \right) \]}
 		\only<+->{\[ \stackrel{\text{Lemma 2.7 } \Rightarrow}{\Rightarrow} F'' \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<+->{\textbf{Contradiction!}}
 	\end{frame}
