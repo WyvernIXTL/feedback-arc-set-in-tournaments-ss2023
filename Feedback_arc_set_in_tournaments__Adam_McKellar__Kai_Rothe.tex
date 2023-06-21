@@ -69,7 +69,7 @@
 	\begin{frame}[fragile]{Feedback Arc Set (FAS)}
 		\begin{align*}			
 			FAS := \{&(G = (V, E), k) | G \text{ is directed } \\
-										&\land \exists E' \subset E : \abs{E'} \leq k : G' = (V, E - E') \text{ is acyclic}  \}		
+										&\land \exists E' \subset E : \abs{E'} \leq k : G' = (V, E \setminus E') \text{ is acyclic}  \}		
 		\end{align*}
 	\end{frame}
 	\begin{frame}[fragile]{Feedback Arc Set (FAS) Example}
@@ -210,7 +210,7 @@
 			\item<3-> \textbf{Assumption:} \( G\circledast F \) has a cycle \( \color{blue} C \)
 			\item<4-> \(\Rightarrow E(C) \cup \left(E(G)\setminus F\right) \neq \left(E(G)\setminus F\right)\)
 			\item<5-> \(\Rightarrow \exists f \in E(C) : f\in rev(F)\)
-			\item<6-> \( \left\{ f_1, f_2, \dotsc, f_n \right\} = C \cap rev(F) \) in order of their appearance in \(C\) \\
+			\item<6-> \( \left\{ f_1, f_2, \dotsc, f_n \right\} = E(C) \cap rev(F) \) in order of their appearance in \(C\) \\
 			\quad \( \left\{ e_1, \dotsc , e_n \right\} =  rev( \left\{ f_1, \dotsc, f_n \right\} ) \)			
 		\end{enumerate}
 	\end{frame}
