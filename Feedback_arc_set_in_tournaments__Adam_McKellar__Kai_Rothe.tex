@@ -287,8 +287,8 @@
 		\newline
 		\only<2->{ There is an algorithm returning in \textit{polynomial} time \((G',k')\): }
 		\begin{itemize}
-			\item<2-> \((G,k) \in FAST \Leftrightarrow (G', k') \in FAST \)
-			\item<2-> \(\abs{V(G')}\le k^2 + 2k \)
+			\item<3-> \((G,k) \in FAST \Leftrightarrow (G', k') \in FAST \)
+			\item<4-> \(\abs{V(G')}\le k^2 + 2k \)
 		\end{itemize}
 	\end{frame}
 	
@@ -310,16 +310,17 @@
 		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). \newline 
 		
 		\begin{center}
-		\uncover<1->{ \includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2.pdf} }
-		\uncover<2>{ \includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2Rev.pdf} }
+		\uncover<2->{ \includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2.pdf} }
+		\uncover<3>{ \includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2Rev.pdf} }
 		\end{center}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
-		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). 
+		Let $(G, k)$ be an instance of FAST. If there is an edge $e \in E(G)$ contained at least $k+1$ triangles, then $e \in F$ for every Feedback Arc Set $F \subset E(G)$ with $\abs{F} \leq k$. 
+		
 		\begin{center}
-			\includegraphics<1>[height=0.6\paperheight]{images/FAST_1/FAST1_Safeness1.pdf}
-			\includegraphics<2>[height=0.6\paperheight]{images/FAST_1/FAST1_Safeness2.pdf}
+			\includegraphics<2>[height=0.6\paperheight]{images/FAST_1/FAST1_Safeness1.pdf}
+			\includegraphics<3>[height=0.6\paperheight]{images/FAST_1/FAST1_Safeness2.pdf}
 		\end{center}
 	\end{frame}
 	
@@ -384,9 +385,9 @@
 	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
 		If a vertex \(v\) of a tournament is contained in a circle of length $L > 3$, then $v$ is also contained in a circle of length $L' < L$.
 		\begin{center}
-		\includegraphics<1>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness1.pdf}
-		\includegraphics<2>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness2.pdf} 
-		\includegraphics<3>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness3.pdf} 
+		\includegraphics<2>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness1.pdf}
+		\includegraphics<3>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness2.pdf} 
+		\includegraphics<4>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness3.pdf} 
 		\end{center}
 	\end{frame}
 	
@@ -426,7 +427,7 @@
 		\BlankLine			 
 		\For{$v \in V(G)$}{
 			\For{$t \in \Delta$}{
-				\If{$v \in t$}{\KwCont \;}
+				\If{$v \in t$}{skip $v$\;}
 			}
 			\KwRet{$(G-v,k)$}\;
 		}
@@ -471,7 +472,7 @@
 		\KwData{\( (G, k) \) instance of FAST}
 		\KwResult{\( (G', k') \) reduced instance of FAST}
 		\BlankLine
-		\If{$(G',k') =$ FAST.1$(G,k) \neq (G,k)$}{Kernel(G',k')}
+		\If{$ k > 0 \land (G',k') =$ FAST.1$(G,k) \neq (G,k)$}{Kernel(G',k')}
 		\If{$(G',k') =$ FAST.2$(G,k) \neq (G,k)$}{Kernel(G',k')}
 		\If{$\abs{V(G)} > k(k+2)$}{\KwRet{No-Instance $(G', k')$ with $\abs{V(G')} \leq k'(k'+2)$}}
 		\KwRet{$(G,k)$}
@@ -479,7 +480,7 @@
 	\uncover<2->{
 	\bigskip
 	$\Rightarrow$ FAST Kernel computable in polynomial time, e.g. bounded by
-	\[ \mathcal{O}(k \cdot \abs{E(G)}^3) + \mathcal{O}(\abs{V(G)}^2 \cdot \abs{E(G)}^3) = \mathcal{O}(k \cdot \abs{V(G)}^2 \cdot \abs{E(G)}^3) \]
+	\[ \mathcal{O}( (k + \abs{V(G)}) \cdot (\abs{E(G)}^3 + \abs{V(G)} \cdot \abs{E(G)}^3) ) \]
 	}
 	
 	\end{frame}
