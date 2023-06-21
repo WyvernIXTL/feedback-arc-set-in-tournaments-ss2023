@@ -285,7 +285,7 @@
 	\begin{frame}[fragile]{Theorem 2.8}
 		\textit{FAST} admits a kernel with at most \(k^{2} + 2k\) vertices. \newline 
 		\newline
-		\only<2->{ \(\exists\) algorithm \(\mathcal {A}\) returning in \textit{polynomial} time \(\mathcal{A}(G,k) = (G',k'): \) }
+		\only<2->{ There is an algorithm returning in \textit{polynomial} time \((G',k')\): }
 		\begin{itemize}
 			\item<2-> \((G,k) \in FAST \Leftrightarrow (G', k') \in FAST \)
 			\item<2-> \(\abs{V(G')}\le k^2 + 2k \)
@@ -297,80 +297,44 @@
 		\begin{center}
 			\includegraphics[height=0.3\paperheight]{images/Triangle/Triangle.pdf}
 		\end{center}
-		\uncover<2->{
-		\begin{align*}
-			\Delta_{G} := \{& (e_1, e_2, e_3) \in E(G)^3 | \\
-			 		       & \exists v_1 \neq v_2 \neq v_3 \in V(G): \\
-					       & e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} 
-		\end{align*} 
-		}
+		% \uncover<2->{
+		% \begin{align*}
+		%	\Delta_{G} := \{& (e_1, e_2, e_3) \in E(G)^3 | \\
+		%	 		       & \exists v_1 \neq v_2 \neq v_3 \in V(G): \\
+		%			       & e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} 
+		% \end{align*} 
+		% }
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1}
 		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). \newline 
-		%TODO: include graphics to explain ?
-		\uncover<2->{
-		\begin{center}
-		\includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2.pdf}
-		\includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2Rev.pdf}
-		\end{center}
-		}
-	\end{frame}
-	
-	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
-		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). \newline 
-		\newline
-		Let \((G,k)\) be an instance of FAST and
-		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
-		\only<2>{ 
-		\begin{align*}
-		& \mathbb{A}: \exists e \in E(G) \text{ contained in at least } k+1 \text{ triangles } \\
-		& \Rightarrow \forall F \in FAS_{(G,k)} : e \in F
-		\end{align*} 
-		}
-		\only<3>{
-		\begin{align*}
-		& \mathbb{A}: (G,k) \in FAST  \\
-		& \Rightarrow \exists F \in FAS_{(G,k)} : e \in F \\
-		& \Rightarrow F \setminus \{e\} \in FAS_{(G \circledast \{e\},k-1)}  \\
-		& \Rightarrow (G',k') = (G \circledast \{e\},k-1) \in FAST
-		\end{align*}
-		}
-	\end{frame}
-	
-	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
-		Let \((G',k') = (G \circledast \{e\}, k-1) \) be an instance of FAST and
-		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
 		
-		\uncover<2->{
-		\begin{align*}
-		& \mathbb{A}: \exists F' \in FAS_{(G',k')}: rev(e) \in F' \\
-		& \Rightarrow F' \setminus rev\{e\} \in FAS_{(G' \circledast rev\{e\},k')} \\
-		& \Rightarrow F' \setminus rev\{e\} \in FAS_{(G, k)} \\
-		& \Rightarrow \exists F \in FAS_{(G, k)}: e \neq F \Rightarrow \text{Contradiction!} \\ 
-		\end{align*}
-		}
+		\begin{center}
+		\uncover<1->{ \includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2.pdf} }
+		\uncover<2>{ \includegraphics[height=0.5\paperheight]{images/FAST_1/Triangle2Rev.pdf} }
+		\end{center}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
-		Let \((G',k') = (G \circledast \{e\}, k-1) \) be an instance of FAST and
-		\[FAS_{(G,k)} := \{ E' \subset E(G) | \text{E' Feedback Arc Set of G} \land \abs{E'} \leq k \} \]
+		If an edge \(e\) is contained in at least \(k+1\) triangles, then reverse \(e\) and reduce \(k\) by \(1\). 
+		\begin{center}
+			\includegraphics<1>[height=0.6\paperheight]{images/FAST_1/FAST1_Safeness1.pdf}
+			\includegraphics<2>[height=0.6\paperheight]{images/FAST_1/FAST1_Safeness2.pdf}
+		\end{center}
+	\end{frame}
 	
-		\begin{align*}
-		& \Rightarrow \forall F' \in FAS_{(G',k')}: rev(e) \notin F' \\ 
-		\\
-		\uncover<2->{
-		& \mathbb{A}: (G',k') \in FAST \\
-		& \Rightarrow \exists F' \in FAS_{(G',k')}: rev(e) \notin F' \\
-		& \Rightarrow \exists F' \in FAS_{(G',k')}: F' \cup \{e\} \in FAS_{(G' \circledast rev\{e\},k'+1)} \\
-		& \Rightarrow (G,k) = (G' \circledast rev\{e\},k'+1) \in FAST
-		}
-		\end{align*}
+	\begin{frame}[fragile]{Reduction FAST.1 - Safeness}
+		\textit{Proof:} Let $(G, k)$ be an instance of FAST. If there is an edge $e \in E(G)$ contained at least $k+1$ triangles, then $e \in F$ for every Feedback Arc Set $F \subset E(G)$ with $\abs{F} \leq k$. 
+		\begin{itemize}
+		 \item If an edge $e = (u, v)$ is contained in triangle $t$, then $t$ is determined by its third vertex $w_t$, s.t. $(u, v), (v, w), (w, u) \in t$. 
+		 \item If an edge $e$ is contained in two different triangles $t_1 \neq t_2$, then $w_{t_1} \neq w_{t_2}$ and thus not other edge except $e$ is contained in both triangles.
+		 \item Assume there is an edge $e$ contained in at least $k+1$ triangles. If there is a Feedback Arc Set $F \subset E(G)$  with $e \notin F$ and $\abs{F} \leq k$, for each of the at least $k+1$ triangles at least one edge is in $F$. Since all those edges are (pairwise) different, $\abs{F} \geq k+1$. A Contradiction!
+		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.1 - Polynomial time}
 		\begin{algorithm}[H]
-		\only<1-2>{
+		\only<1>{
 		\KwData{\( (G, k) \) instance of FAST}
 		\KwResult{\( (G', k') \) reduced instance of FAST}
 		\BlankLine
@@ -386,21 +350,23 @@
 				}
 			}
 		}
+		... \;
 		}
 		\only<2->{
-		$\Delta = \{(e_1, e_2, e_3) \in E(G)^3 | \exists v_1 \neq v_2 \neq v_3 \in V(G): e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} $\;
+		... \;
+		% $\Delta = \{(e_1, e_2, e_3) \in E(G)^3 | \exists v_1 \neq v_2 \neq v_3 \in V(G): e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} $\;
 		\BlankLine	
 		\For{$e \in E(G)$}{
-			$k_e \gets 0$\;
+			$counter := 0$\;
 			\For{$t \in \Delta$}{
-				\If{$e \in t$}{$k_e \gets k_e + 1$\;}
-				\If{$k_e \geq k+1$}{\KwRet{$(G \circledast \{e\}, k-1)$}\;}
+				\If{$e \in t$}{$counter \gets counter + 1$\;}
+				\If{$counter \geq k+1$}{\KwRet{$(G \circledast \{e\}, k-1)$}\;}
 			}
 		}
 		\KwRet{$(G,k)$}\;
 		}
 		\end{algorithm}
-		\only<3->{
+		\uncover<3->{
 		\bigskip
 		$\Rightarrow$ FAST.1 is computable in polynomial time, e.g. bounded by
 		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{E(G)}^4) = \mathcal{O}(\abs{E(G)}^4) \]
@@ -409,64 +375,34 @@
 	
 	\begin{frame}[fragile]{Reduction FAST.2}
 		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
-		\uncover<2->{
 		\begin{center}
-		\includegraphics[height=0.5\paperheight]{images/FAST_2/GraphWithVertex.pdf}
-		\includegraphics[height=0.5\paperheight]{images/FAST_2/GraphWithoutVertex.pdf}
+		\uncover<2->{ \includegraphics[height=0.5\paperheight]{images/FAST_2/GraphWithVertexUncolored.pdf} }
+		\uncover<3->{ \includegraphics[height=0.5\paperheight]{images/FAST_2/GraphWithoutVertex.pdf} }
 		\end{center}
-		 }
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
-		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
-		 \begin{align*}
-		 & \mathbb{A}: (G,k) \in FAST \\
-		 & \Rightarrow \exists F \in FAS_{(G,k)} \\
-		 & \Rightarrow F-v \in FAS_{(G,k)} \\
-		 & \Rightarrow F-v \in FAS_{(G-v,k)} \\
-		 & \Rightarrow (G',k') = (G-v, k) \in FAST
-		 \end{align*}
-	\end{frame}
-	
-	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
-		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament.
-   		\begin{align*}
-        		& V^{\rightarrow v} := \{u \in V(G) | (u, v) \in E(G) \} \\
-        		& V^{\leftarrow v} := \{u \in V(G) | (v, u) \in E(G) \}
-        		\end{align*}
+		If a vertex \(v\) of a tournament is contained in a circle of length $L > 3$, then $v$ is also contained in a circle of length $L' < L$.
 		\begin{center}
-		\includegraphics[height=0.3\paperheight]{images/FAST_2/GraphV.pdf}
-		\uncover<2->{ \includegraphics[height=0.3\paperheight]{images/FAST_2/GraphVCircle.pdf} }
+		\includegraphics<1>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness1.pdf}
+		\includegraphics<2>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness2.pdf} 
+		\includegraphics<3>[height=0.6\paperheight]{images/FAST_2/FAST2_Safeness3.pdf} 
 		\end{center}
-		 \uncover<2->{\[\Rightarrow \nexists (u, w) \in E(G) : u \in V^{\leftarrow v} \land w \in V^{\rightarrow v} \]}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2 - Safeness}
-		If a vertex \(v\) is not contained in any triangle, then delete \(v\) from the tournament. \\
-		\medskip
-		\qquad \( \forall V' \subset V(G) : G[ V' ] := (V', \{(u, v) \in E(G) | u, v \in V' \}) \)
-		
-		\begin{wrapfigure}{R}{0.2\textwidth}
-   			\centering
-			\includegraphics[width = 0.2\textwidth]{images/FAST_2/GraphV2.pdf}
-		\end{wrapfigure}
-		
-		\begin{align*} %TODO: better alignment
-		& \mathbb{A}: (G',k') = (G-v, k) \in FAST \\
-        		& \Rightarrow \exists F' \in FAS_{(G-v, k)} \\
-        		& \Rightarrow F' \cap E(G-v[V^{\rightarrow v}]) \in FAS_{(G-v[V^{\rightarrow v}],n)} \\ 
-		& \land F' \cap E(G-v[V^{\leftarrow v}]) \in FAS_{(G-v[V^{\leftarrow v}],m)} \text{ for } n + m = k \\
-        		& \Rightarrow F^{\rightarrow v} := F' \cap E(G[V^{\rightarrow v}]) \in FAS_{(G[V^{\rightarrow v}],n)} \\ 
-		& \land F^{\leftarrow v} := F' \cap E(G[V^{\leftarrow v}]) \in FAS_{(G[V^{\leftarrow v}],m)} \text{ for } n + m = k \\
-        		& \Rightarrow F^{\rightarrow v} \cup F^{\leftarrow v} \in FAS_{(G[V^{\rightarrow v}] \cup G[V^{\leftarrow v}], n + m)} \\
-        		& \Rightarrow (G,k) = (G[V^{\rightarrow v}] \cup G[V^{\leftarrow v}], n+m) \in FAST
-    		\end{align*}
-		
+		\textit{Proof:} Let $(G, k)$ be an instance of FAST. If a vertex \(v \in V(G)\) is not contained in triangle, then $v$ is not contained in a directed circle.		\begin{itemize}
+		\item If a vertex  \(v \in V(G)\) is contained in a directed circle, then $v$ is contained in a triangle. This follows from repeated application of the following argument:
+		\item Let $v$ be contained in a directed circle $v, w_1, w_2, ..., w_{L-1}$. If $L = 3$ finish. Since $G$ is a tournament, else $L > 3$ and either $(v, w_2) \in E(G)$ or $(w_2, v) \in E(G)$.
+		\item If $(v, w_2) \in E(G)$, then $v, w_2, ..., w_{L-1}$ are contained in a directed circle of length $L' = L-1 < L$.
+		\item If  $(w_2, v) \in E(G)$, then $v, w_1, w_2$ are contained in a triangle of length $L' = 3 < L$.
+		\item Thus $v$ is also contained in a directed circle of length $L' < L$. 
+		\end{itemize}
 	\end{frame}
 	
 	\begin{frame}[fragile]{Reduction FAST.2 - Polynomial time}
 		\begin{algorithm}[H]
-		\only<1-2>{
+		\only<1>{
 		\KwData{\( (G, k) \) instance of FAST}
 		\KwResult{\( (G', k') \) reduced instance of FAST}
 		\BlankLine
@@ -482,9 +418,11 @@
 				}
 			}
 		}
+		... \;
 		}
 		\only<2->{
-		$\Delta = \{(e_1, e_2, e_3) \in E(G)^3 | \exists v_1 \neq v_2 \neq v_3 \in V(G): e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} $\;
+		... \;
+		% $\Delta = \{(e_1, e_2, e_3) \in E(G)^3 | \exists v_1 \neq v_2 \neq v_3 \in V(G): e_1 = (v_1, v_2) \land e_2 = (v_2, v_3) \land e_3 = (v_3, v_1) \} $\;	
 		\BlankLine			 
 		\For{$v \in V(G)$}{
 			\For{$t \in \Delta$}{
@@ -495,61 +433,34 @@
 		\KwRet{$(G,k)$}\;
 		}
 		\end{algorithm}
-		\only<3->{
+		\uncover<3->{
 		\bigskip
 		$\Rightarrow$ FAST.2 is computable in polynomial time, e.g. bounded by
 		\[ \mathcal{O}(\abs{E(G)}^3) + \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) + \mathcal{O}(\abs{E(G)}) = \mathcal{O}(\abs{V(G)} \cdot \abs{E(G)}^3) \]
 		}
 		\end{frame}
-	
-	\begin{frame}[fragile]{Theorem 2.8 - Proof}
-		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline \newline
-		\(\Rightarrow \exists F \in FAS_{(G,k)} : \)
-		\begin{multline*}
-			\forall v \in V(G) : \exists t \in \Delta_G, u \in V(G): (v, u) \in t \lor (u, v) \in t 
-		\end{multline*}
-		\uncover<2>{\begin{multline*} 
-			\forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G, u \in V(G) : \right. \\ \left. e \in t \land ( (u, v) \in t \lor (v, u) \in t ) \} } \leq k+2
-		\end{multline*}
+		
+	\begin{frame}[fragile]{Theorem 2.8 - Upper Size Bound}
+		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. 
 		\begin{center}
-			\includegraphics[height = 0.3\pageheight]{images/Theorem28/TrianglesWithE.pdf}
+		\includegraphics<2>[height=0.25\paperheight]{images/Theorem28/Theorem28_5.pdf}
+		\includegraphics<3>[height=0.35\paperheight]{images/Theorem28/Theorem28_4.pdf}
+		\includegraphics<4>[height=0.4\paperheight]{images/Theorem28/Theorem28_3.pdf}
+		\includegraphics<5>[height=0.25\paperheight]{images/Theorem28/Theorem28_2.pdf}
+		\includegraphics<6->[height=0.35\paperheight]{images/Theorem28/Theorem28_1.pdf}
 		\end{center}
-		}
-	\end{frame}
-	
-	\begin{frame}[fragile]{Theorem 2.8 - Proof}
-		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
-		\newline
-		\(\Rightarrow \exists F \in FAS_{(G,k)} : \) 
-		\[\forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
-		\[ \forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G: e \in t \land e_v \in t \} } \leq k+2  \]
-		where \( e_v \in t \Leftrightarrow \exists u \in V(G): (v, u) \in t \lor (u, v) \in t \)
-		
-		\uncover<2->{ 
-		\begin{align*}
-		\Rightarrow V(G) &= \{v \in V(G) | \exists t \in \Delta_G: e_v \in t \} \\
-		&= \{v \in V(G) | \exists e \in F, t \in \Delta_G: e \in t \land e_v \in t \} \\
-		&= \bigcup_{e \in F} \{v \in V(G) | t \in \Delta_G: e \in t \land e_v \in t \}
-		\end{align*}
-		}
+		\only<7> { \[ \Rightarrow \abs{V(G)} \leq k(k+2) \] }
 		
 	\end{frame}
 	
-	\begin{frame}[fragile]{Theorem 2.8 - Proof}
-		Let \((G,k) \in FAST\) : neither FAST.1 nor FAST.2 are applicable. \newline
-		\newline
-		\(\Rightarrow \exists F \in FAS_{(G,k)} : \) 
-		\[\forall v \in V(G) : \exists t \in \Delta_G: e_v \in t \]
-		\[ \forall e \in F : \abs{ \{ v \in V(G) | \exists t \in \Delta_G: e \in t \land e_v \in t \} } \leq k+2  \]
-		where \( e_v \in t \Leftrightarrow \exists u \in V(G): (v, u) \in t \lor (u, v) \in t \)
-		
-		\begin{align*} 
-		\Rightarrow V(G) &=  \bigcup_{e \in F} \{v \in V(G) | t \in \Delta_G: e \in t \land e_v \in t \} \\
-		\only<2->{
-		\Rightarrow \abs{V(G)} & \leq \sum_{e \in F} \abs{ \{v \in V(G) | t \in \Delta_G: e \in t \land e_v \in t \} } \\
-		& \leq \sum_{e \in F} (k+2) \leq k(k+2) 
-		}
-		\end{align*}
+	\begin{frame}[fragile]{Theorem 2.8 - Upper Size Bound}
+		\textit{Proof:} If \((G,k) \in FAST\) such that neither FAST.1 nor FAST.2 are applicable, then $\abs{V(G)} \leq k(k+2)$. 
+		\begin{itemize}
+		 \item Every vertex $v \in V(G)$ must be contained in a triangle $t$, else FAST.2 could be applied. 
+		 \item Since \((G,k) \in FAST\), there is a Feedback Arc Set $F \subset E(G)$ with $\abs{F} \leq k$. Then for every triangle $t$ there is at least one edge $e \in t$ in $F$.
+		 \item Every edge $e \in F$ is contained in at most $k$ triangles, else FAST.1 could be applied. Thus for each edge $e \in F$ there are at most $k+2$ vertices contained in a triangle with $e$. 
+		\item Since all vertices $v$ are contained in a triangle with an edge $e \in F$, and there are at most $k$ edges in $F$, there are at most $k(k+2)$ vertices in $G$.
+		\end{itemize}
 	\end{frame}
 	
 	% Define recursive Function for pseudocode
@@ -562,16 +473,10 @@
 		\BlankLine
 		\If{$(G',k') =$ FAST.1$(G,k) \neq (G,k)$}{Kernel(G',k')}
 		\If{$(G',k') =$ FAST.2$(G,k) \neq (G,k)$}{Kernel(G',k')}
-		\If{$\abs{V(G)} > k(k+2)$}{\KwRet{No-Instance of FAST}}
+		\If{$\abs{V(G)} > k(k+2)$}{\KwRet{No-Instance $(G', k')$ with $\abs{V(G')} \leq k'(k'+2)$}}
 		\KwRet{$(G,k)$}
 	\end{function}
-	\only<1>{
-	where a No-Instance of FAST might be $(G',k' = 0)$ with
-	\begin{gather*}
-	V(G') = \{v_1 \neq v_2 \neq v_3 \in V(G)\} \\ E(G') = \{(v_1, v_2), (v_2, v_3), (v_3, v_1) | v_1 \neq v_2 \neq v_3 \in V(G')\}) 
-	\end{gather*}
-		}
-	\only<2->{
+	\uncover<2->{
 	\bigskip
 	$\Rightarrow$ FAST Kernel computable in polynomial time, e.g. bounded by
 	\[ \mathcal{O}(k \cdot \abs{E(G)}^3) + \mathcal{O}(\abs{V(G)}^2 \cdot \abs{E(G)}^3) = \mathcal{O}(k \cdot \abs{V(G)}^2 \cdot \abs{E(G)}^3) \]
@@ -579,10 +484,10 @@
 	
 	\end{frame}
 	
-	\begin{frame}[fragile]{Theorem 2.8 - Proof}
+	\begin{frame}[fragile]{Theorem 2.8}
 		\textit{FAST} admits a kernel with at most \(k^{2} + 2k\) vertices. \newline 
 		\newline
-		\(\exists\) algorithm \(\mathcal {A}\) returning in \textit{polynomial} time \(\mathcal{A}(G,k) = (G',k'): \)
+		There is an algorithm returning in \textit{polynomial} time \((G',k'): \)
 		\begin{itemize}
 			\item \((G,k) \in FAST \Leftrightarrow (G', k') \in FAST \)
 			\item \(\abs{V(G')} \leq k(k+2) = k^2 + 2k \)
