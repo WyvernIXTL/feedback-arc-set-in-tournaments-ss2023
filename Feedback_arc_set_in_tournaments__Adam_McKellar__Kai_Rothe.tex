@@ -280,6 +280,19 @@
 		\only<+->{\[ \stackrel{\text{Lemma 2.7 } \Rightarrow}{\Rightarrow} F'' \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} \]}
 		\only<+->{\textbf{Contradiction!}}
 	\end{frame}
+
+	\begin{frame}[fragile]{Transition}
+		\begin{flalign*}
+			&\qquad G\circledast F \text{ is a directed acyclic graph} &\\
+			&\stackrel{\text{\textbf{Observation 2.6}}}{\Rightarrow} &\\
+			&\qquad F \text{ is a feedback arc set of } G &
+		\end{flalign*}	
+		\begin{flalign*}
+			&\qquad F \in \min \left\{ F' \subset E(G) | F' \text{ is a Feedback Arc Set of } G \right\} &\\
+			&\stackrel{\text{\textbf{Lemma 2.7}}}{\Leftrightarrow} &\\
+			&\qquad F \in \min \left\{ F' \subset E(G) | G\circledast F' \text{ is acyclic} \right\} &
+		\end{flalign*}
+	\end{frame}
 	
 	
 		\section{Theorem 2.8: quadratic kernel for feedback arc sets in tournaments}
