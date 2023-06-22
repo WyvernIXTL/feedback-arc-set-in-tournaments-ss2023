@@ -486,8 +486,8 @@
 		\KwData{\( (G, k) \) instance of FAST}
 		\KwResult{\( (G', k') \) reduced instance of FAST}
 		\BlankLine
-		\If{$ k > 0 \land (G',k') =$ FAST.1$(G,k) \neq (G,k)$}{Kernel(G',k')}
-		\If{$(G',k') =$ FAST.2$(G,k) \neq (G,k)$}{Kernel(G',k')}
+		\If{$ k > 0 \land (G',k') :=$ FAST.1$(G,k) \neq (G,k)$}{\KwRet{Kernel(G',k')}}
+		\If{$(G',k') :=$ FAST.2$(G,k) \neq (G,k)$}{\KwRet{Kernel(G',k')}}
 		\If{$\abs{V(G)} > k(k+2)$}{\KwRet{No-Instance $(G', k')$ with $\abs{V(G')} \leq k'(k'+2)$}}
 		\KwRet{$(G,k)$}
 	\end{function}
